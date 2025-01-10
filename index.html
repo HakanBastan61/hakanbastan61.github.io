@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fox Toptan - E-Ticaret Kar Hesaplayıcı</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Fox Toptan - E-Ticaret Kar Hesaplayıcı</h1>
+        
+        <!-- Giriş Formu -->
+        <section>
+            <label for="sellingPrice">Ürün Satış Fiyatı (TL):</label>
+            <input type="number" id="sellingPrice" required>
+
+            <label for="costPrice">Ürün Maliyet Fiyatı (TL):</label>
+            <input type="number" id="costPrice" required>
+
+            <label for="shippingCost">Kargo Maliyeti (TL):</label>
+            <input type="number" id="shippingCost" required>
+
+            <label for="packagingCost">Paketleme Maliyeti (TL/YOKSA 0 YAZ):</label>
+            <input type="number" id="packagingCost" required>
+
+            <label for="additionalCosts">Diğer Maliyetler (TL/YOKSA 0 YAZ):</label>
+            <input type="number" id="additionalCosts" required>
+
+            <label for="commissionRate">Komisyon Oranı (%):</label>
+            <input type="number" id="commissionRate" required>
+
+            <label for="vatRate">KDV Oranı (%):</label>
+            <input type="number" id="vatRate" required>
+
+            <button type="button" onclick="calculateProfit()">Benim İçin Hesapla</button>
+        </section>
+
+        <!-- Sonuçlar -->
+        <section id="results" style="display: none;">
+            <h2>Hesaplama Sonuçları</h2>
+            <p id="costSummary"></p>
+            <p id="commissionSummary"></p>
+            <p id="vatSummary"></p>
+            <p id="totalCostSummary"></p>
+            <p id="profitSummary"></p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
