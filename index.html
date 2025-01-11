@@ -20,6 +20,9 @@
 
             <label for="shippingCost">Kargo Maliyeti (TL):</label>
             <input type="number" id="shippingCost" required>
+			
+			<label for="trendyolFee">Trendyol Hizmet Bedeli (TL):</label>
+            <input type="number" id="trendyolFee" required>
 
             <label for="packagingCost">Paketleme Maliyeti (TL/YOKSA 0 YAZ):</label>
             <input type="number" id="packagingCost" required>
@@ -32,6 +35,7 @@
 
             <label for="vatRate">KDV Oranı (%):</label>
             <input type="number" id="vatRate" required>
+
 
             <button type="button" onclick="calculateProfit()">Benim İçin Hesapla</button>
         </section>
@@ -47,6 +51,37 @@
         </section>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function calculateProfit() {
+            const sellingPrice = parseFloat(document.getElementById("sellingPrice").value);
+            const costPrice = parseFloat(document.getElementById("costPrice").value);
+            const shippingCost = parseFloat(document.getElementById("shippingCost").value);
+            const packagingCost = parseFloat(document.getElementById("packagingCost").value);
+            const additionalCosts = parseFloat(document.getElementById("additionalCosts").value);
+            const commissionRate = parseFloat(document.getElementById("commissionRate").value) / 100;
+            const vatRate = parseFloat(document.getElementById("vatRate").value) / 100;
+            const trendyolFee = parseFloat(document.getElementById("trendyolFee").value);
+
+            if (isNaN(sellingPrice) || isNaN(costPrice) || isNaN(shippingCost) || isNaN(packagingCost) || 
+                isNaN(additionalCosts) || isNaN(commissionRate) || isNaN(vatRate) || isNaN(trendyolFee)) {
+                alert("Lütfen tüm alanları doğru bir şekilde doldurun.");
+                return;
+            }
+
+            const totalCost = costPrice + shippingCost + packagingCost + additionalCosts + trendyolFee;
+            const commission = sellingPrice * commissionRate;
+            const vat = sellingPrice * vatRate;
+            const finalCost = totalCost + commission + vat;
+            const profit = sellingPrice - finalCost;
+
+            document.getElementById("costSummary").innerText = `Toplam Maliyet (KDV & KOMİSYON HARİÇ): ${totalCost.toFixed(2)} TL`;
+            document.getElementById("commissionSummary").innerText = `Ödenecek Komisyon Tutarı: ${commission.toFixed(2)} TL`;
+            document.getElementById("vatSummary").innerText = `Ödenecek KDV Tutarı: ${vat.toFixed(2)} TL`;
+            document.getElementById("totalCostSummary").innerText = `Toplam Maliyet (Herşey Dahil): ${finalCost.toFixed(2)} TL`;
+            document.getElementById("profitSummary").innerText = `Edeceğiniz Net Kar: ${profit.toFixed(2)} TL`;
+
+            document.getElementById("results").style.display = "block";
+        }
+    </script>
 </body>
 </html>
