@@ -73,12 +73,13 @@
             const vat = sellingPrice * vatRate;
             const finalCost = totalCost + commission + vat;
             const profit = sellingPrice - finalCost;
+            const profitMargin = (profit / sellingPrice) * 100; // Kar marjı hesaplama
 
             document.getElementById("costSummary").innerText = `Toplam Maliyet (KDV & KOMİSYON HARİÇ): ${totalCost.toFixed(2)} TL`;
             document.getElementById("commissionSummary").innerText = `Ödenecek Komisyon Tutarı: ${commission.toFixed(2)} TL`;
             document.getElementById("vatSummary").innerText = `Ödenecek KDV Tutarı: ${vat.toFixed(2)} TL`;
             document.getElementById("totalCostSummary").innerText = `Toplam Maliyet (Herşey Dahil): ${finalCost.toFixed(2)} TL`;
-            document.getElementById("profitSummary").innerText = `Edeceğiniz Net Kar: ${profit.toFixed(2)} TL`;
+            document.getElementById("profitSummary").innerText = `Edeceğiniz Net Kar: ${profit.toFixed(2)} TL\nEdeceğiniz Kâr Marjı: ${profitMargin.toFixed(2)}%`;
 
             document.getElementById("results").style.display = "block";
         }
